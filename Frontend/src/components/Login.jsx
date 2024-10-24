@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import {useDispatch} from "react-redux"
 import {setUser} from "../store/userSlice"
+import { toast } from "react-toastify";
 const Login = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
@@ -26,10 +27,11 @@ const Login = () => {
       const response = await axios.post('http://localhost:3000/api/users/login', formData);
       console.log('Login response:', response.data);
       dispatch(setUser(response.data.user))
+      toast.success("login successfull")
       // navigate('/dashboard'); // Redirect on successful login
       navigate("/home")
     } catch (error) {
-   
+      toast.error("Login Failed Please Enter Valid credentials")
       console.error('Login error:', error);
     }
     

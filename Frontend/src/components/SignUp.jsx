@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -56,13 +57,17 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:3000/api/users/signup', formData);
       console.log('Signup response:', response.data);
+      toast.success("successfully registered")
       navigate('/'); // Redirect on successful signup
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        setErrorMessage(error.response.data.message); // Display error from backend
+        setErrorMessage(error.response.data.message);
+        
+         // Display error from backend
       } else {
         setErrorMessage('An error occurred during signup');
       }
+      
       console.error('Signup error:', error);
     }
   };

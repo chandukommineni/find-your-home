@@ -5,6 +5,7 @@ import {useSelector} from "react-redux"
 import { useState } from "react";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 const Properties = () => {
   const {properties,loading}=useSelector((state)=>state.properties)
   const user=useSelector((state)=>state.user)
@@ -83,13 +84,7 @@ const Properties = () => {
                  return <Card data={property}/>
             })
             :
-            <div
-            className="inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] text-success opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite]"
-            role="status">
-            <span
-              className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-            >Loading...</span>
-          </div>
+           <Spinner/>
            }
       </div>
     </div>
